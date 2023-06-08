@@ -15,7 +15,7 @@ namespace TakeCtrl.app.Communication
     {
         private readonly HttpClient _httpClient;
         private const string ServerUrl =
-            "https://localhost:7196/";
+            "http://localhost:5100/api";
         private bool _isLogginIn = false;
 
         /*        public UserService(HttpClient httpClient)
@@ -25,22 +25,30 @@ namespace TakeCtrl.app.Communication
 
         public UserService()
         {
-            _httpClient = new HttpClient(new HttpClientHandler());
+            _httpClient = new HttpClient();
         }
         public async Task<bool> Login(LoginUser loginUser)
         {
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return false;
 
-            //var response = await _httpClient.GetAsync($"{ServerUrl}/Server)").ConfigureAwait(false);
-            //response.EnsureSuccessStatusCode();
+            var test = new LoginUser
+            {
+                userName = "Testing",
+                password = "ddddd"
+            };
+            var response = await _httpClient.PostAsJsonAsync("http://localhost:5100/api/User/login", loginUser);
+            //var result = await _httpClient.GetAsync("http://localhost:5100/api/Server");
+            //var servers = result.Content;
 
-            //return await response.Content.ReadFromJsonAsync<IEnumerable<Server>>();
+            //var content = response.Content.ReadAsStringAsync().ToString();
+            //return content.ReadFromJsonAsync<bool>().Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
 
-            var response = await _httpClient.PostAsJsonAsync($"{ServerUrl}/user/login", loginUser).ConfigureAwait(false);
-
-            var content = response.Content;
-            return content.ReadFromJsonAsync<bool>().Result;
+            return false;
         }
     }
 }

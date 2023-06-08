@@ -37,8 +37,8 @@ namespace TakeCtrl.app.ViewModel
             {
                 LoginUser loginuser = new LoginUser
                 {
-                    UserName = userName,
-                    Password = password
+                    userName = userName,
+                    password = password
                 };
                 var loggedIn = await userService.Login(loginuser);
 
@@ -48,6 +48,10 @@ namespace TakeCtrl.app.ViewModel
                     await Application.Current.MainPage.DisplayAlert
                     ("Login Succes",
                     "Your username and password do not match our records", "Ok");
+                } else
+                {
+                    await Application.Current.MainPage.DisplayAlert
+                        ("Login failure", "Please check your username and password or try again later.", "Failed");
                 }
             }catch (Exception ex) 
             {

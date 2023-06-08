@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TakeCtrl.app.Data
 {
-    public class LoginUser
+    internal class LoginDto
     {
-        public string userName { get; set; }
-        public string password { get; set; } 
+        public string userName;
+        public string password;
     }
 }
