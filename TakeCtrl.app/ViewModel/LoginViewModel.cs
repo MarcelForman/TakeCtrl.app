@@ -45,12 +45,9 @@ namespace TakeCtrl.app.ViewModel
                 if (loggedIn)
                 {
 
-/*                    await Application.Current.MainPage.DisplayAlert
-                    ("Login Succes",
-                    "Your username and password do not match our records", "Ok");*/
-
                     Application.Current.MainPage = new AppShell();
                     await Shell.Current.GoToAsync("serveroverview");
+
                 } else
                 {
                     await Application.Current.MainPage.DisplayAlert

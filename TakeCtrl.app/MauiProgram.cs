@@ -20,7 +20,11 @@ public static class MauiProgram
 			});
 		builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<LoginViewModel>();
-		builder.Services.AddSingleton<IUserService, UserService>();	
+		builder.Services.AddSingleton<IUserService, UserService>();
+
+		builder.Services.AddTransient<ServerOverview>();
+		builder.Services.AddTransient<ServerOverviewViewModel>();
+		builder.Services.AddSingleton<IServerService, ServerService>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

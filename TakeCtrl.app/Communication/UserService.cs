@@ -32,11 +32,6 @@ namespace TakeCtrl.app.Communication
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return false;
 
-            var test = new LoginUser
-            {
-                userName = "Testing",
-                password = "ddddd"
-            };
             var response = await _httpClient.PostAsJsonAsync("http://localhost:5100/api/User/login", loginUser);
             //var result = await _httpClient.GetAsync("http://localhost:5100/api/Server");
             //var servers = result.Content;
