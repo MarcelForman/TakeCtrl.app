@@ -45,20 +45,22 @@ namespace TakeCtrl.app.ViewModel
                 if (loggedIn)
                 {
 
-                    await Application.Current.MainPage.DisplayAlert
+/*                    await Application.Current.MainPage.DisplayAlert
                     ("Login Succes",
-                    "Your username and password do not match our records", "Ok");
+                    "Your username and password do not match our records", "Ok");*/
+
+                    Application.Current.MainPage = new AppShell();
+                    await Shell.Current.GoToAsync("serveroverview");
                 } else
                 {
                     await Application.Current.MainPage.DisplayAlert
-                        ("Login failure", "Please check your username and password or try again later.", "Failed");
+                        ("Login failure", "Please check your username and password or try again later.", "Ok");
                 }
             }catch (Exception ex) 
             {
 
                 await Application.Current.MainPage.DisplayAlert
-                ("Authorization failure", 
-                "Your username and password do not match our records", "Ok");                
+                ("Login failure", "Please check your username and password or try again later.", "Ok");                
                 Console.WriteLine(ex);
             }
         }
