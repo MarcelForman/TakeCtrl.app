@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TakeCtrl.app.Communication;
 using TakeCtrl.app.Data;
 
@@ -22,7 +24,7 @@ namespace TakeCtrl.app.ViewModel
         public ServerOverviewViewModel(ServerService serverService)
         {
             this.serverService = serverService;
-            //LoadDataCommand = new Command(async () => await LoadData());
+            _ = new Command(async () => await LoadData());
 
         }
 
@@ -32,6 +34,25 @@ namespace TakeCtrl.app.ViewModel
             servers = new ObservableCollection<ServerDto>();
         }
 
+        [RelayCommand]
+        public async Task SelectServer(ServerDto server)
+        {
+            if (server is not null)
+            {
+/*                Shell.Current.GoToAsync($"{nameof(View.ServerDetails)}?load=",
+                new Dictionary<string, object>
+                {
+                    [nameof(ServerDto)] = server,
+                });*/
+
+                await Shell.Current.GoToAsync("serverdetails",
+                    new Dictionary<string, object>
+                    {
+                        { "Server", server }
+                    }
+                    );
+            }
+        }
         [RelayCommand]
         public async Task LoadData()
         {
