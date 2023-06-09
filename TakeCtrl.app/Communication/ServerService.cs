@@ -57,7 +57,7 @@ namespace TakeCtrl.app.Communication
 
             try
             {
-                var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/Server/changestatus", changeStatus);
+                var response = await _httpClient.PutAsJsonAsync($"{BaseAddress}/api/Server/changestatus", changeStatus);
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -99,6 +99,36 @@ namespace TakeCtrl.app.Communication
             catch
             {
                 return Enumerable.Empty<Firewall>();
+            }
+        }
+
+        public async Task<Usage> GetUsage(UsageReq usageDto)
+        {
+
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return default(Usage);
+
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/Server/averageusage", usageDto);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return default(Usage);
+                    }
+
+                    return await response.Content.ReadFromJsonAsync<Usage>();
+                }
+                else
+                {
+                    return default(Usage);
+                }
+            }
+            catch
+            {
+                return default(Usage);
             }
         }
     }

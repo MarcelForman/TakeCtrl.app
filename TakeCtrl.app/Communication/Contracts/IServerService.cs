@@ -11,5 +11,6 @@ namespace TakeCtrl.app.Communication.Contracts
     {
         Task<IEnumerable<ServerDto>> GetServers();
         Task<IEnumerable<Firewall>> GetFirewalls(string uuid);
+        Task<Usage> GetUsage(UsageReq usageDto);
     }
 }

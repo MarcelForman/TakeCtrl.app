@@ -27,31 +27,76 @@
                 Text="Stop VPS"
                 Command="{Binding StopVPSCommand}"></Button>
         </HorizontalStackLayout>
-        <HorizontalStackLayout>
+        <VerticalStackLayout>
             <Label
+                Margin="0,0,0,0"
                 Text="Firewall"
                 FontSize="22"/>
-        </HorizontalStackLayout>
-        <CollectionView             
+            <Button
+                CornerRadius="0"
+                BackgroundColor="White"
+                TextColor="Black"
+                Text="Get firewall rules"
+                Command="{Binding GetFirewallCommand}"></Button>
+            <CollectionView             
             ItemsSource="{Binding Firewalls}"             
             x:Name="serversCollection"
+            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <FlexLayout>
+                            <Label Margin="0,0,10,0" Text="{Binding Usages.CpuAvg, StringFormat='Name: {0}'}"/>
+                            <Label Margin="0,0,10,0" Text="{Binding StartPort, StringFormat='Start port: {0}'}"/>
+                            <Label Margin="0,0,10,0" Text="{Binding EndPort, StringFormat='End port: {0}'}"/>
+                            <Label Margin="0,0,10,0" Text="{Binding Protocol, StringFormat='Protocol: {0}'}"/>
+                        </FlexLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label
+                Margin="0,0,10,0"
+                VerticalOptions="Center"
+                Text="Start date:"/>
+            <DatePicker MinimumDate="{Binding MinDate}"
+                        MaximumDate="{Binding MaxDate}"
+                        Date="{Binding StartDate}"
+                        Margin="0,0,10,0"/>
+            <Label
+                Margin="0,0,10,0"
+                VerticalOptions="Center"
+                Text="Start date:"/>
+            <DatePicker MinimumDate="{Binding MinDate}"
+                        MaximumDate="{Binding MaxDate}"
+                        Date="{Binding EndDate}"/>
+        </HorizontalStackLayout>
+        <Button
+                Text="Get Usage"
+                Command="{Binding GetUsageCommand}"/>
+        <CollectionView             
+            ItemsSource="{Binding Usages}"             
+            x:Name="usageCollection"
             SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <FlexLayout>                        
-                        <Label Margin="0,0,10,0" Text="{Binding Description, StringFormat='Name: {0}'}"/>
-                        <Label Margin="0,0,10,0" Text="{Binding StartPort, StringFormat='Start port: {0}'}"/>
-                        <Label Margin="0,0,10,0" Text="{Binding EndPort, StringFormat='End port: {0}'}"/>
-                        <Label Margin="0,0,10,0" Text="{Binding Protocol, StringFormat='Protocol: {0}'}"/>                        
+                    <FlexLayout
+                        Direction="Column">
+                        <Label Margin="0,0,10,0" Text="{Binding CpuAvg, StringFormat='CPU: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding DiskReadAvg, StringFormat='Disk Read: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding DiskWriteAvg, StringFormat='Disk Write: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding NetworkInAvg, StringFormat='Network In: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding NetworkoutAvg, StringFormat='Network Out: {0}'}"/>
                     </FlexLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button
-                Text="Get firewall rules"
-                Command="{Binding GetFirewallCommand}"/>
+
     </VerticalStackLayout>
 </ContentPage>

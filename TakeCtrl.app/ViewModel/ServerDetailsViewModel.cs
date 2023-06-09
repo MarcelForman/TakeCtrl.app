@@ -23,18 +23,27 @@ namespace TakeCtrl.app.ViewModel
         public ServerDto reqServer;
         [ObservableProperty]
         public ObservableCollection<Firewall> firewalls;
+        [ObservableProperty]
+        public string minDate = DateTime.Now.AddDays(-30).ToString();
+        [ObservableProperty]
+        public string maxDate = DateTime.Now.ToString();
+        [ObservableProperty]
+        public string startDate = DateTime.Today.ToString();
+        [ObservableProperty]
+        public string endDate = DateTime.Today.ToString();
+        [ObservableProperty]
+        public ObservableCollection<Usage> usages;
 
         public ServerDetailsViewModel()
         {
             serverService = new ServerService();
             reqServer = default(ServerDto);
             firewalls = new ObservableCollection<Firewall>();
+            usages = new ObservableCollection<Usage>();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Application.Current.MainPage.DisplayAlert
-            ("Login failure", "Please check your username and password", "Ok");
             var _server = (ServerDto)query.Values.First();
             Status = _server.Status;
             ReqServer = _server;
@@ -88,6 +97,38 @@ namespace TakeCtrl.app.ViewModel
                 }
 
             } catch (Exception ex) 
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        [RelayCommand]
+        public async Task GetUsage()
+        {
+            var parameters = new UsageReq
+            {
+                Uuid = reqServer.UUID,
+                StartDate = this.StartDate.ToString(),
+                EndDate = this.EndDate.ToString(),
+            };
+            
+            try
+            {
+                var result = await serverService.GetUsage(parameters);
+
+                if (result != null)
+                {
+                    Usages.Clear();
+                    Usages.Add(result);
+                    if (Usages.Count == 0)
+                    {
+                        await Application.Current.MainPage.DisplayAlert
+                            ("No information found", "No firewall rules found, please try again later.", "Ok");
+                    }
+                }
+
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
