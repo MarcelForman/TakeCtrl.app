@@ -10,5 +10,6 @@ namespace TakeCtrl.app.Communication.Contracts
     public interface IServerService
     {
         Task<IEnumerable<ServerDto>> GetServers();
+        Task<IEnumerable<Firewall>> GetFirewalls(string uuid);
     }
 }

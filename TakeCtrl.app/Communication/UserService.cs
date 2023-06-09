@@ -17,6 +17,9 @@ namespace TakeCtrl.app.Communication
         private const string ServerUrl =
             "http://localhost:5100/api";
         private bool _isLogginIn = false;
+        private readonly string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android
+        ? "http://10.0.2.2:5100"
+        : "http://localhost:5100";
 
         /*        public UserService(HttpClient httpClient)
                 {
@@ -32,12 +35,8 @@ namespace TakeCtrl.app.Communication
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
                 return false;
 
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:5100/api/User/login", loginUser);
-            //var result = await _httpClient.GetAsync("http://localhost:5100/api/Server");
-            //var servers = result.Content;
+            var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/User/login", loginUser);
 
-            //var content = response.Content.ReadAsStringAsync().ToString();
-            //return content.ReadFromJsonAsync<bool>().Result;
             if (response.IsSuccessStatusCode)
             {
                 return true;

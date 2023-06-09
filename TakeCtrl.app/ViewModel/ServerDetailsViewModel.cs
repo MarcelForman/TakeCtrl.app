@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +18,17 @@ namespace TakeCtrl.app.ViewModel
     {
         private ServerService serverService;
         [ObservableProperty]
-        public String uuid;
+        public String status;
         [ObservableProperty]
         public ServerDto reqServer;
+        [ObservableProperty]
+        public ObservableCollection<Firewall> firewalls;
 
         public ServerDetailsViewModel()
         {
             serverService = new ServerService();
             reqServer = default(ServerDto);
+            firewalls = new ObservableCollection<Firewall>();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -29,8 +36,61 @@ namespace TakeCtrl.app.ViewModel
             Application.Current.MainPage.DisplayAlert
             ("Login failure", "Please check your username and password", "Ok");
             var _server = (ServerDto)query.Values.First();
-            Uuid = _server.UUID;
+            Status = _server.Status;
             ReqServer = _server;
+        }
+
+        [RelayCommand]
+        public async Task StopVPS()
+        {
+            var changeStatus = new ChangeStatus
+            {
+                UUID = reqServer.UUID,
+                Status = "stopped"
+            };
+            var result = await serverService.ChangeStatus(changeStatus);
+
+            Status = "stopped";
+        }
+
+        [RelayCommand]
+        public async Task StartVPS()
+        {
+            var changeStatus = new ChangeStatus
+            {
+                UUID = reqServer.UUID,
+                Status = "running"
+            };
+            var result = await serverService.ChangeStatus(changeStatus);
+
+            Status = "running";
+        }
+
+        [RelayCommand]
+        public async Task GetFirewall()        {
+
+            try
+            {
+                var result = await serverService.GetFirewalls(ReqServer.UUID);
+
+                if (result != null)
+                {
+                    Firewalls.Clear();
+                    foreach (Firewall server in result)
+                    {
+                        Firewalls.Add(server);
+                    }
+                    if (Firewalls.Count == 0)
+                    {
+                        await Application.Current.MainPage.DisplayAlert
+                            ("No information found", "No firewall rules found, please try again later.", "Ok");
+                    }
+                }
+
+            } catch (Exception ex) 
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
     }

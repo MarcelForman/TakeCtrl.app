@@ -3,7 +3,7 @@ using Android.Runtime;
 
 namespace TakeCtrl.app;
 
-[Application]
+[Application(UsesCleartextTraffic = true)]  // emulator's host for debugging,
 public class MainApplication : MauiApplication
 {
 	public MainApplication(IntPtr handle, JniHandleOwnership ownership)

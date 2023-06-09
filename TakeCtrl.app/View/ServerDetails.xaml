@@ -4,9 +4,54 @@
              x:Class="TakeCtrl.app.View.ServerDetails"
              Title="ServerDetails">
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding ReqServer.UUID}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+            <Label
+                Text="{Binding ReqServer.UUID, StringFormat='UUID: {0}'}"/>
+            <Label
+                Text="{Binding ReqServer.Name, StringFormat='Name: {0}'}"/>
+            <Label
+                Text="{Binding ReqServer.CPUAmount, StringFormat='CPU amount: {0}'}"/>
+            <Label
+                Text="{Binding ReqServer.DiskSize, StringFormat='Disksize: {0}'}"/>
+            <Label
+                Text="{Binding ReqServer.MemorySize, StringFormat='MemorySize: {0}'}"/>
+            <Label
+                Text="{Binding Status, StringFormat='Status: {0}'}"/>
+            <Label
+                Text="{Binding ReqServer.IPAddress, StringFormat='IPAddress: {0}'}"/>
+        <HorizontalStackLayout>
+            <Button
+                Text="Start VPS"
+                Command="{Binding StartVPSCommand}"></Button>
+            <Button
+                Text="Stop VPS"
+                Command="{Binding StopVPSCommand}"></Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label
+                Text="Firewall"
+                FontSize="22"/>
+        </HorizontalStackLayout>
+        <CollectionView             
+            ItemsSource="{Binding Firewalls}"             
+            x:Name="serversCollection"
+            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="1"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <FlexLayout>                        
+                        <Label Margin="0,0,10,0" Text="{Binding Description, StringFormat='Name: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding StartPort, StringFormat='Start port: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding EndPort, StringFormat='End port: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding Protocol, StringFormat='Protocol: {0}'}"/>                        
+                    </FlexLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button
+                Text="Get firewall rules"
+                Command="{Binding GetFirewallCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

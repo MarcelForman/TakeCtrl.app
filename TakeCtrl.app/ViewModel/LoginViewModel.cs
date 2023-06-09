@@ -57,7 +57,7 @@ namespace TakeCtrl.app.ViewModel
             {
 
                 await Application.Current.MainPage.DisplayAlert
-                ("Login failure", "Please check your username and password or try again later.", "Ok");                
+                ("Login failure", ex.Message, "Ok");                
                 Console.WriteLine(ex);
             }
         }

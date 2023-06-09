@@ -27,8 +27,7 @@ namespace TakeCtrl.app.Communication
 
             try
             {
-                //  var response = await _httpClient.GetAsync($"{BaseAddress}/api/Server");
-                var response = await _httpClient.GetAsync("http://localhost:5100/api/Server");
+                var response = await _httpClient.GetAsync($"{BaseAddress}/api/Server");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -49,6 +48,58 @@ namespace TakeCtrl.app.Communication
                 return Enumerable.Empty<ServerDto>();
             }
 
+        }
+
+        public async Task<bool> ChangeStatus(ChangeStatus changeStatus)
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return false;
+
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/Server/changestatus", changeStatus);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Firewall>> GetFirewalls(string uuid)
+        {
+
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return Enumerable.Empty<Firewall>();
+
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BaseAddress}/api/Server/firewall/{uuid}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return Enumerable.Empty<Firewall>();
+                    }
+
+                    return await response.Content.ReadFromJsonAsync<IEnumerable<Firewall>>();
+                }
+                else
+                {
+                    return Enumerable.Empty<Firewall>();
+                }
+            }
+            catch
+            {
+                return Enumerable.Empty<Firewall>();
+            }
         }
     }
 }
