@@ -5,6 +5,7 @@ using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,19 @@ namespace TakeCtrl.app.ViewModel
         {
             this.serverService = serverService;
             _ = new Command(async () => await LoadData());
-
+            try 
+            {
+                Accelerometer.Start(SensorSpeed.UI);
+                Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
+            } catch (FeatureNotSupportedException ex) 
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        void Accelerometer_ShakeDetected(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new AppShell();
+            Shell.Current.GoToAsync("feedback");
         }
 
         public ServerOverviewViewModel()
@@ -39,11 +52,6 @@ namespace TakeCtrl.app.ViewModel
         {
             if (server is not null)
             {
-/*                Shell.Current.GoToAsync($"{nameof(View.ServerDetails)}?load=",
-                new Dictionary<string, object>
-                {
-                    [nameof(ServerDto)] = server,
-                });*/
 
                 await Shell.Current.GoToAsync("serverdetails",
                     new Dictionary<string, object>
@@ -57,14 +65,6 @@ namespace TakeCtrl.app.ViewModel
         public async Task LoadData()
         {
             var result = await serverService.GetServers();
-
-            /*            MainThread.BeginInvokeOnMainThread(() =>
-                        {
-                            foreach (ServerDto server in result.Result)
-                            {
-                                Servers.Add(server);
-                            }
-                        });*/
 
             if (result != null)
             {
