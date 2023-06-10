@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TakeCtrl.app.View.CreateUser"
+             Title="CreateUser">
+    <Frame BorderColor="Gray"
+                           CornerRadius="5"
+                           Padding="8"
+                           Margin="5"
+                           >
+        <StackLayout>
+            <Label Text="Create user" FontSize="Title" Padding="10"/>
+            <BoxView Color="Gray"
+                                     HeightRequest="2"
+                                     HorizontalOptions="Fill"/>
+            <Label Text="Name:" Padding="5"/>
+            <Entry Text="{Binding Name}" />
+            <Label Text="User Name:" Padding="5"/>
+            <Entry Text="{Binding UserName}" />
+            <Label Text="Password:" Padding="5"/>
+            <Entry Text="{Binding Password}" />
+            <Label Text="Is Admin:"/>
+            <Label Text="Yes:"/>
+            <RadioButton IsChecked="{Binding AChecked}" GroupName="set1"/>
+            <Label Text="No:"/>
+            <RadioButton IsChecked="{Binding BChecked}" GroupName="set1"/>
+            <Button
+                Text="Create user"
+                Command="{Binding AddUserCommand}"
+                HorizontalOptions="Center"/>
+        </StackLayout>
+    </Frame>
+</ContentPage>

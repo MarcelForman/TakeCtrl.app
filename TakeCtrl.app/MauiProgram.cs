@@ -38,8 +38,17 @@ public static class MauiProgram
 		builder.Services.AddTransient<ServerDetailsViewModel>();
 
 		builder.Services.AddTransient<Feedback>();
-		builder.Services.AddTransient<FeedbackViewModel>();
-		builder.Services.AddSingleton<IFeedbackService, FeedbackService>();
+		builder.Services.AddSingleton<FeedbackViewModel>();
+		builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+
+		builder.Services.AddTransient<Users>();
+		builder.Services.AddSingleton<UserViewModel>();
+
+		builder.Services.AddTransient<UserDetails>();
+		builder.Services.AddTransient<UserDetailsViewModel>();
+
+		builder.Services.AddTransient<CreateUser>();
+		builder.Services.AddTransient<CreateUserViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

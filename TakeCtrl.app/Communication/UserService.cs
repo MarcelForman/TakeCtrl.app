@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TakeCtrl.app.Communication.Contracts;
 using TakeCtrl.app.Data;
+using TakeCtrl.app.Model;
 
 namespace TakeCtrl.app.Communication
 {
@@ -43,6 +44,51 @@ namespace TakeCtrl.app.Communication
             }
 
             return false;
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return Enumerable.Empty<User>();
+
+            var response = await _httpClient.GetAsync($"{BaseAddress}/api/users");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<IEnumerable<User>>();
+            }
+
+            return Enumerable.Empty<User>();
+        }
+
+        public async Task<bool> DeleteUser(int id)
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return false;
+
+            var response = await _httpClient.DeleteAsync($"{BaseAddress}/api/User/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<User> PostUser(User user)
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                return default(User);
+
+            var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/User/adduser", user);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<User>();
+            }
+
+            return default(User);
         }
     }
 }

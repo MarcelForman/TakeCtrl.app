@@ -17,5 +17,15 @@
             <ShellContent ContentTemplate="{DataTemplate view:Feedback}"/>
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="Users">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate view:Users}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Create user">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate view:CreateUser}"/>
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

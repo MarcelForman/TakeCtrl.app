@@ -25,7 +25,7 @@ namespace TakeCtrl.app.ViewModel
 
         public FeedbackViewModel()
         {
-           _feedbackService = new FeedbackService();
+            _feedbackService = new FeedbackService();
         }
 
         [RelayCommand]
@@ -44,11 +44,6 @@ namespace TakeCtrl.app.ViewModel
 
                 result = await _feedbackService.PostFeedback(feedback);
 
-                if (result)
-                {
-                    await Application.Current.MainPage.DisplayAlert
-                        ("Succes", "Thank you", "Ok");
-                }
             }
             catch (Exception)
             {
