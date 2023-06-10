@@ -4,9 +4,45 @@
              x:Class="TakeCtrl.app.View.Feedback"
              Title="Feedback">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
+        <Label
+            Margin="10,10,10,10"
+            FontSize="Title"
+            Text="Please give us your feedback!"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
+        <Grid
+            ColumnDefinitions="*,*"
+            RowDefinitions="*,*,3*,*">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Name:"/>
+            <Entry
+                Text="{Binding Name}"
+                Grid.Row="0"
+                Grid.Column="1"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="E-mailadres:"/>
+            <Entry
+                Text="{Binding Email}"
+                Grid.Row="1"
+                Grid.Column="1"/>
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Message:"/>
+            <Entry
+                Text="{Binding Message}"
+                Grid.Row="2"
+                Grid.Column="1"/>
+            <Button
+                Command="{Binding PostFeedbackCommand}"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Text="Send feedback"/>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using TakeCtrl.app.Communication;
 using TakeCtrl.app.Communication.Contracts;
 using TakeCtrl.app.View;
@@ -13,13 +14,19 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(DeviceInfo.Platform == DevicePlatform.Android
+            ? "http://10.0.2.2:5100"
+            : "http://localhost:5100" )});
+
+
+        builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<LoginViewModel>();
 		builder.Services.AddSingleton<IUserService, UserService>();
 
@@ -29,6 +36,10 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<ServerDetails>();
 		builder.Services.AddTransient<ServerDetailsViewModel>();
+
+		builder.Services.AddTransient<Feedback>();
+		builder.Services.AddTransient<FeedbackViewModel>();
+		builder.Services.AddSingleton<IFeedbackService, FeedbackService>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
