@@ -65,6 +65,7 @@ namespace TakeCtrl.app.ViewModel
         public async Task LoadData()
         {
             var result = await serverService.GetServers();
+            bool statusFlag = false;
 
             if (result != null)
             {
@@ -72,12 +73,26 @@ namespace TakeCtrl.app.ViewModel
                 foreach (ServerDto server in result)
                 {
                     Servers.Add(server);
+                    if (server.Status == "stopped")
+                    {
+                        statusFlag = true;
+                    }
                 }
                 if (Servers.Count == 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert
-                        ("Failure retrieving", "No servers found, please try again later.", "Ok");
+                    Servers.Add(new ServerDto
+                    {
+                        Name = "No servers found"
+                    });
                 }
+
+                if (statusFlag)
+                {
+                    await Application.Current.MainPage.DisplayAlert
+                      ("Server offline", "One ore more serves are offline.", "Ok");
+                }
+
+                
             }
         }
     }
