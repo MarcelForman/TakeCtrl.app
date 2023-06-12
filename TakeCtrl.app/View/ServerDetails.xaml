@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TakeCtrl.app.View.ServerDetails"
              Title="ServerDetails">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Margin="10,10,10,10">
 
             <Label
                 Text="{Binding ReqServer.UUID, StringFormat='UUID: {0}'}"/>
@@ -12,30 +13,36 @@
             <Label
                 Text="{Binding ReqServer.CPUAmount, StringFormat='CPU amount: {0}'}"/>
             <Label
-                Text="{Binding ReqServer.DiskSize, StringFormat='Disksize: {0}'}"/>
+                Text="{Binding ReqServer.DiskSize, StringFormat='Disksize: {0} GB'}"/>
             <Label
-                Text="{Binding ReqServer.MemorySize, StringFormat='MemorySize: {0}'}"/>
+                Text="{Binding ReqServer.MemorySize, StringFormat='MemorySize: {0} GB'}"/>
             <Label
                 Text="{Binding Status, StringFormat='Status: {0}'}"/>
             <Label
                 Text="{Binding ReqServer.IPAddress, StringFormat='IPAddress: {0}'}"/>
-        <HorizontalStackLayout>
-            <Button
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Button  
+                Margin="10,10,10,10"
+                HorizontalOptions="Center"
                 Text="Start VPS"
                 Command="{Binding StartVPSCommand}"></Button>
             <Button
+                Margin="10,10,10,10"
+                HorizontalOptions="Center"
                 Text="Stop VPS"
                 Command="{Binding StopVPSCommand}"></Button>
         </HorizontalStackLayout>
         <VerticalStackLayout>
+            <BoxView Color="Gray"
+                     Margin="10,10,10,10"
+                     HeightRequest="2"
+                     HorizontalOptions="Fill"/>
             <Label
                 Margin="0,0,0,0"
                 Text="Firewall"
                 FontSize="22"/>
             <Button
-                CornerRadius="0"
-                BackgroundColor="White"
-                TextColor="Black"
+                HorizontalOptions="Center"
                 Text="Get firewall rules"
                 Command="{Binding GetFirewallCommand}"></Button>
             <CollectionView             
@@ -47,15 +54,19 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <FlexLayout>
-                            <Label Margin="0,0,10,0" Text="{Binding Usages.CpuAvg, StringFormat='Name: {0}'}"/>
-                            <Label Margin="0,0,10,0" Text="{Binding StartPort, StringFormat='Start port: {0}'}"/>
-                            <Label Margin="0,0,10,0" Text="{Binding EndPort, StringFormat='End port: {0}'}"/>
-                            <Label Margin="0,0,10,0" Text="{Binding Protocol, StringFormat='Protocol: {0}'}"/>
-                        </FlexLayout>
+                            <FlexLayout>
+                                <Label Margin="0,0,10,0" Text="{Binding Usages.CpuAvg, StringFormat='Name: {0}'}"/>
+                                <Label Margin="0,0,10,0" Text="{Binding StartPort, StringFormat='Start port: {0}'}"/>
+                                <Label Margin="0,0,10,0" Text="{Binding EndPort, StringFormat='End port: {0}'}"/>
+                                <Label Margin="0,0,10,0" Text="{Binding Protocol, StringFormat='Protocol: {0}'}"/>
+                            </FlexLayout>                                
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <BoxView Color="Gray"
+                     Margin="10,10,10,10"
+                     HeightRequest="2"
+                     HorizontalOptions="Fill"/>
         </VerticalStackLayout>
         <HorizontalStackLayout>
             <Label
@@ -75,6 +86,8 @@
                         Date="{Binding EndDate}"/>
         </HorizontalStackLayout>
         <Button
+                Margin="10,10,10,10"
+                HorizontalOptions="Center"
                 Text="Get Usage"
                 Command="{Binding GetUsageCommand}"/>
         <CollectionView             

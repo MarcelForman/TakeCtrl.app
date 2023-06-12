@@ -21,7 +21,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout BackgroundColor="LightGray">
+                    <StackLayout>
                         <Label Text="{Binding Name}" FontSize="Title"/>
                         <Label Text="{Binding UUID, StringFormat='UUID: {0}'}"/>
                         <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>

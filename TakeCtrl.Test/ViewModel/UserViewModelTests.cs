@@ -9,7 +9,7 @@ using TakeCtrl.Test.Mock;
 
 namespace TakeCtrl.Test.ViewModel
 {
-    public class LoginViewModelTests
+    public class UserViewModelTests
     {
         [Fact]
         public async Task IfNoUsersThenShowUserWithNoUserMessage()

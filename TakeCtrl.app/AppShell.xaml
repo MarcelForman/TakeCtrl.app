@@ -6,10 +6,32 @@
     xmlns:local="clr-namespace:TakeCtrl.app.View"
     xmlns:view="clr-namespace:TakeCtrl.app.View"
     Shell.FlyoutBehavior="Flyout">
-
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="White"
+                  HeightRequest="200">
+                <Image Aspect="AspectFill"
+                       Source="store.jpg"
+                       Opacity="0.6" />
+                <Label Text="TakeCtrl"
+                       TextColor="Silver"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
     <FlyoutItem Title="Server overview">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate view:ServerOverview}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Users">
+        <Tab Title="Users">
+            <ShellContent ContentTemplate="{DataTemplate view:Users}"/>
+        </Tab>
+        <Tab Title="Create User">
+            <ShellContent ContentTemplate="{DataTemplate view:CreateUser}"/>
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="Feedback">
@@ -17,15 +39,4 @@
             <ShellContent ContentTemplate="{DataTemplate view:Feedback}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Users">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate view:Users}"/>
-        </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Create user">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate view:CreateUser}"/>
-        </Tab>
-    </FlyoutItem>
-
 </Shell>

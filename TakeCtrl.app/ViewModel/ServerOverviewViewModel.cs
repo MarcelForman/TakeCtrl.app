@@ -26,12 +26,13 @@ namespace TakeCtrl.app.ViewModel
         public ServerOverviewViewModel(IServerService serverService)
         {
             this.serverService = serverService;
+            servers = new ObservableCollection<ServerDto>();
             _ = new Command(async () => await LoadData());
             try 
             {
                 Accelerometer.Start(SensorSpeed.UI);
                 Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
-            } catch (FeatureNotSupportedException ex) 
+            } catch (Exception ex) 
             {
                 Debug.WriteLine(ex.Message);
             }

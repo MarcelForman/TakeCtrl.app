@@ -27,5 +27,15 @@ namespace TakeCtrl.Test.ViewModel
 
             Assert.True(invoked);
         }
+
+        [Fact]
+        public void StartDateIsDateToday()
+        {
+            var viewModel = new ServerDetailsViewModel();
+
+            var result = viewModel.StartDate.Equals(DateTime.Today.ToString());
+
+            Assert.True(result);
+        }
     }
 }
