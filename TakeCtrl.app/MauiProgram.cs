@@ -31,7 +31,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IUserService, UserService>();
 
 		builder.Services.AddTransient<ServerOverview>();
-		builder.Services.AddTransient<ServerOverviewViewModel>();
+		builder.Services.AddScoped<ServerOverviewViewModel>();
 		builder.Services.AddSingleton<IServerService, ServerService>();
 
 		builder.Services.AddTransient<ServerDetails>();

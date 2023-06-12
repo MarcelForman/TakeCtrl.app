@@ -39,4 +39,9 @@
             <ShellContent ContentTemplate="{DataTemplate view:Feedback}"/>
         </Tab>
     </FlyoutItem>
+    <FlyoutItem Title="Change account">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate view:LoginPage}"/>
+        </Tab>
+    </FlyoutItem>
 </Shell>

@@ -61,7 +61,8 @@ namespace TakeCtrl.app.ViewModel
 
                 await toast.Show(cancellationTokenSource.Token);
 
-
+                Application.Current.MainPage = new AppShell();
+                await Shell.Current.GoToAsync("users");
             }
             else
             {

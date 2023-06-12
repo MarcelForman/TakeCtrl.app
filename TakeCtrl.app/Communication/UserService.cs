@@ -31,19 +31,19 @@ namespace TakeCtrl.app.Communication
         {
             _httpClient = new HttpClient();
         }
-        public async Task<bool> Login(LoginUser loginUser)
+        public async Task<User> Login(LoginUser loginUser)
         {
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return false;
+                return default(User);
 
             var response = await _httpClient.PostAsJsonAsync($"{BaseAddress}/api/User/login", loginUser);
 
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                return await response.Content.ReadFromJsonAsync<User>();
             }
 
-            return false;
+            return default(User);
         }
 
         public async Task<IEnumerable<User>> GetUsers()

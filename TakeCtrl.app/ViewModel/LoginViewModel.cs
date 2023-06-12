@@ -42,9 +42,9 @@ namespace TakeCtrl.app.ViewModel
                 };
                 var loggedIn = await userService.Login(loginuser);
 
-                if (loggedIn)
+                if (loggedIn != null)
                 {
-
+                    Helper.IsAdmin = loggedIn.IsAdmin;
                     Application.Current.MainPage = new AppShell();
                     await Shell.Current.GoToAsync("serveroverview");
 

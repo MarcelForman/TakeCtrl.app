@@ -105,7 +105,7 @@
                         <Label Margin="0,0,10,0" Text="{Binding DiskReadAvg, StringFormat='Disk Read: {0}'}"/>
                         <Label Margin="0,0,10,0" Text="{Binding DiskWriteAvg, StringFormat='Disk Write: {0}'}"/>
                         <Label Margin="0,0,10,0" Text="{Binding NetworkInAvg, StringFormat='Network In: {0}'}"/>
-                        <Label Margin="0,0,10,0" Text="{Binding NetworkoutAvg, StringFormat='Network Out: {0}'}"/>
+                        <Label Margin="0,0,10,0" Text="{Binding NetworkOutAvg, StringFormat='Network Out: {0}'}"/>
                     </FlexLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

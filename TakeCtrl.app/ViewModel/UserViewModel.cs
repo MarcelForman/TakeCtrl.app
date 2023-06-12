@@ -26,6 +26,13 @@ namespace TakeCtrl.app.ViewModel
         {
             this.userService = userService;
             users = new ObservableCollection<User>();
+            if (!Helper.IsAdmin)
+            {
+                Application.Current.MainPage.DisplayAlert
+                    ("Not Authorized", "You are not authorized to view this page, you will be redirected", "Ok");
+                Application.Current.MainPage = new AppShell();
+                Shell.Current.GoToAsync("serveroverview");
+            }
         }
 
         [RelayCommand]

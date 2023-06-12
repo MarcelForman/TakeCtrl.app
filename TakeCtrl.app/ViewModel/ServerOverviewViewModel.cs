@@ -22,12 +22,15 @@ namespace TakeCtrl.app.ViewModel
         private IServerService serverService;
         [ObservableProperty]
         ObservableCollection<ServerDto> servers;
+        private readonly Task initTask;
 
         public ServerOverviewViewModel(IServerService serverService)
         {
             this.serverService = serverService;
             servers = new ObservableCollection<ServerDto>();
-            _ = new Command(async () => await LoadData());
+            //LoadDataCommand = new Command(async () => await LoadData());
+            this.initTask = InitAsync();
+
             try 
             {
                 Accelerometer.Start(SensorSpeed.UI);
@@ -36,6 +39,15 @@ namespace TakeCtrl.app.ViewModel
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        private async Task InitAsync()
+        {
+            if (!Helper.IsLoaded)
+            {
+                Helper.IsLoaded = true;
+                await LoadData();
+            }            
         }
         void Accelerometer_ShakeDetected(object sender, EventArgs e)
         {
@@ -48,6 +60,8 @@ namespace TakeCtrl.app.ViewModel
             this.serverService = new ServerService();
             servers = new ObservableCollection<ServerDto>();
         }
+
+        //public ICommand LoadDataCommand { get; private set; }
 
         [RelayCommand]
         public async Task SelectServer(ServerDto server)

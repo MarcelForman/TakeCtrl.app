@@ -10,7 +10,7 @@ namespace TakeCtrl.app.Communication.Contracts
 {
     public interface IUserService
     {
-        Task<bool> Login(LoginUser loginUser);
+        Task<User> Login(LoginUser loginUser);
         Task<IEnumerable<User>> GetUsers();
         Task<bool> DeleteUser(int id);
         Task<User> PostUser(User user);

@@ -43,7 +43,10 @@ namespace TakeCtrl.app.ViewModel
                 var toast = Toast.Make(toastMessage, duration, fontSize);
 
                 await toast.Show(cancellationTokenSource.Token);
-            
+
+            Application.Current.MainPage = new AppShell();
+            await Shell.Current.GoToAsync("users");
+
         }
     }
 }

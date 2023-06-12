@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TakeCtrl.app.View.LoginPage"
              Title="Login">
-    <VerticalStackLayout>
+    <VerticalStackLayout VerticalOptions="Center">
         <HorizontalStackLayout
             VerticalOptions="Center" 
             HorizontalOptions="Center"
