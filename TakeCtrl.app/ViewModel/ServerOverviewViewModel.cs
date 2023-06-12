@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TakeCtrl.app.Communication;
+using TakeCtrl.app.Communication.Contracts;
 using TakeCtrl.app.Data;
 
 namespace TakeCtrl.app.ViewModel
@@ -18,11 +19,11 @@ namespace TakeCtrl.app.ViewModel
     [ObservableObject]
     public partial class ServerOverviewViewModel
     {
-        private ServerService serverService;
+        private IServerService serverService;
         [ObservableProperty]
         ObservableCollection<ServerDto> servers;
 
-        public ServerOverviewViewModel(ServerService serverService)
+        public ServerOverviewViewModel(IServerService serverService)
         {
             this.serverService = serverService;
             _ = new Command(async () => await LoadData());
