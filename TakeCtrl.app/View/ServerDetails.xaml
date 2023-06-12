@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
+    
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TakeCtrl.app.View.ServerDetails"
              Title="ServerDetails">
+    <ContentPage.Resources>
+        <Style x:Key="cpuinfo"
+               TargetType="Label">
+            <Setter Property="Margin" Value="3,3,3,3"/>
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </ContentPage.Resources>
     <VerticalStackLayout
         Margin="10,10,10,10">
-
+        <VerticalStackLayout>
             <Label
-                Text="{Binding ReqServer.UUID, StringFormat='UUID: {0}'}"/>
+                Text="{Binding ReqServer.UUID, StringFormat='UUID: {0}'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding ReqServer.Name, StringFormat='Name: {0}'}"/>
+                Text="{Binding ReqServer.Name, StringFormat='Name: {0}'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding ReqServer.CPUAmount, StringFormat='CPU amount: {0}'}"/>
+                Text="{Binding ReqServer.CPUAmount, StringFormat='CPU amount: {0}'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding ReqServer.DiskSize, StringFormat='Disksize: {0} GB'}"/>
+                Text="{Binding ReqServer.DiskSize, StringFormat='Disksize: {0} GB'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding ReqServer.MemorySize, StringFormat='MemorySize: {0} GB'}"/>
+                Text="{Binding ReqServer.MemorySize, StringFormat='MemorySize: {0} GB'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                Text="{Binding Status, StringFormat='Status: {0}'}" Style="{StaticResource cpuinfo}"/>
             <Label
-                Text="{Binding ReqServer.IPAddress, StringFormat='IPAddress: {0}'}"/>
+                Text="{Binding ReqServer.IPAddress, StringFormat='IPAddress: {0}'}" Style="{StaticResource cpuinfo}"/>
         <HorizontalStackLayout HorizontalOptions="Center">
-            <Button  
+                <Button  
                 Margin="10,10,10,10"
                 HorizontalOptions="Center"
                 Text="Start VPS"
                 Command="{Binding StartVPSCommand}"></Button>
-            <Button
+                <Button
                 Margin="10,10,10,10"
                 HorizontalOptions="Center"
                 Text="Stop VPS"
                 Command="{Binding StopVPSCommand}"></Button>
-        </HorizontalStackLayout>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
         <VerticalStackLayout>
+
             <BoxView Color="Gray"
                      Margin="10,10,10,10"
                      HeightRequest="2"

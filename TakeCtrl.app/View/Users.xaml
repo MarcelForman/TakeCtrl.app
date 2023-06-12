@@ -16,20 +16,22 @@
             x:Name="usersCollection">   
             <CollectionView.ItemTemplate>
                 <DataTemplate >
-                    <Frame BorderColor="Gray"
-                           CornerRadius="5"
+                    <Border Stroke="#f2f2f2"
+                            StrokeThickness="4"
+                            StrokeShape="RoundRectangle 5,5,5,5"
+                           
                            Padding="8"
                            Margin="5"
-                           >
+                        >
                         <StackLayout>
-                        <Label Text="{Binding Name}" FontSize="Title" Padding="10"/>
+                            <Label Text="{Binding Name}" FontSize="Title" Padding="10"/>
                             <BoxView Color="Gray"
                                      HeightRequest="2"
                                      HorizontalOptions="Fill"/>
                             <Label Text="{Binding userName, StringFormat='Username: {0}'}" Padding="5"/>
                             <Label Text="{Binding IsAdmin, StringFormat='Admin: {0}'}" Padding="5"/>
                         </StackLayout>
-                        </Frame>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

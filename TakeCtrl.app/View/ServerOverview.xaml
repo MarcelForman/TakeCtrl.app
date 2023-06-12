@@ -10,7 +10,7 @@
             Command="{Binding LoadDataCommand}"
             />
         <CollectionView      
-            Margin="30,20,30,30"
+            VerticalOptions="Center"
             ItemsSource="{Binding Servers}"                   
             SelectionChangedCommand="{Binding SelectServerCommand}"
             SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}"
@@ -21,13 +21,18 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Name}" FontSize="Title"/>
-                        <Label Text="{Binding UUID, StringFormat='UUID: {0}'}"/>
-                        <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
-                        <Label Text="Date of refresh:"/>
-                        <BoxView HeightRequest="1" BackgroundColor="LightGray"/>
-                    </StackLayout>
+                    <Border Stroke="#f2f2f2"
+                            StrokeThickness="4"
+                            StrokeShape="RoundRectangle 5,5,5,5"                           
+                            Padding="8"
+                            Margin="1">
+                        <StackLayout VerticalOptions="Center">
+                            <Label Text="{Binding Name}" FontSize="Title"/>
+                            <Label Text="{Binding UUID, StringFormat='UUID: {0}'}"/>
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            <Label Text="Date of refresh:"/>
+                        </StackLayout>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

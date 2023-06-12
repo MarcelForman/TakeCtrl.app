@@ -61,8 +61,6 @@ namespace TakeCtrl.app.ViewModel
             servers = new ObservableCollection<ServerDto>();
         }
 
-        //public ICommand LoadDataCommand { get; private set; }
-
         [RelayCommand]
         public async Task SelectServer(ServerDto server)
         {

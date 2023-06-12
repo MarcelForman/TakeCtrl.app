@@ -21,6 +21,8 @@ namespace TakeCtrl.app.ViewModel
         ObservableCollection<User> users;
         [ObservableProperty]
         public int deleteUserId;
+        private readonly Task initTask;
+
 
         public UserViewModel(IUserService userService)
         {
@@ -33,6 +35,15 @@ namespace TakeCtrl.app.ViewModel
                 Application.Current.MainPage = new AppShell();
                 Shell.Current.GoToAsync("serveroverview");
             }
+           this.initTask = InitAsync();
+
+        }
+
+        private async Task InitAsync()
+        {
+
+                await GetUsers();
+
         }
 
         [RelayCommand]

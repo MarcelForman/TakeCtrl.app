@@ -61,6 +61,14 @@ namespace TakeCtrl.app.ViewModel
             var toast = Toast.Make(toastMessage, duration, fontSize);
 
             await toast.Show(cancellationTokenSource.Token);
+            Empty();
+        }
+
+        public void Empty()
+        {
+            Name = "";
+            Email = "";
+            Message = "";
         }
     }
 }

@@ -42,7 +42,7 @@ public static class MauiProgram
 		builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 
 		builder.Services.AddTransient<Users>();
-		builder.Services.AddSingleton<UserViewModel>();
+		builder.Services.AddTransient<UserViewModel>();
 
 		builder.Services.AddTransient<UserDetails>();
 		builder.Services.AddTransient<UserDetailsViewModel>();

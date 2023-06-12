@@ -9,9 +9,6 @@ public partial class App : Application
 	public App(LoginPage page)
 	{
 		InitializeComponent();
-
-		//MainPage = new AppShell();
-		//MainPage = new LoginPage(loginViewModel);
 		MainPage = page;
 	}
 }

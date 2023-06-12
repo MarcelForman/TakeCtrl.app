@@ -4,6 +4,11 @@
              x:Class="TakeCtrl.app.View.LoginPage"
              Title="Login">
     <VerticalStackLayout VerticalOptions="Center">
+        <Label
+            Margin="20,20,20,20"
+            HorizontalOptions="Center"
+            Text="TakeCtrl"
+            FontSize="Title"/>
         <HorizontalStackLayout
             VerticalOptions="Center" 
             HorizontalOptions="Center"
