@@ -41,9 +41,7 @@ namespace TakeCtrl.app.ViewModel
 
         private async Task InitAsync()
         {
-
                 await GetUsers();
-
         }
 
         [RelayCommand]

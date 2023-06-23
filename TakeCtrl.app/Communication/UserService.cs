@@ -18,14 +18,14 @@ namespace TakeCtrl.app.Communication
         private const string ServerUrl =
             "http://localhost:5100/api";
         private bool _isLogginIn = false;
-        private readonly string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android
+        private readonly string BaseAddress = (DeviceInfo.Platform == DevicePlatform.Android)
         ? "http://10.0.2.2:5100"
         : "http://localhost:5100";
 
-        /*        public UserService(HttpClient httpClient)
-                {
-                    this._httpClient = httpClient;
-                }*/
+/*        public UserService(HttpClient httpClient)
+        {
+            this._httpClient = httpClient;
+        }*/
 
         public UserService()
         {

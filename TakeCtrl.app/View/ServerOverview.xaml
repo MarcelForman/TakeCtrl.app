@@ -6,9 +6,14 @@
              Title="ServerOverview">
     <StackLayout>
         <Button
+            Margin="10,10,10,10"
+            HorizontalOptions="Center"
             Text="Refresh"
             Command="{Binding LoadDataCommand}"
             />
+        <Label
+            Text="{Binding RefreshDate, StringFormat='Refresh date: {0}'}"
+            HorizontalOptions="Center"/>
         <CollectionView      
             VerticalOptions="Center"
             ItemsSource="{Binding Servers}"                   
@@ -30,7 +35,6 @@
                             <Label Text="{Binding Name}" FontSize="Title"/>
                             <Label Text="{Binding UUID, StringFormat='UUID: {0}'}"/>
                             <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
-                            <Label Text="Date of refresh:"/>
                         </StackLayout>
                     </Border>
                 </DataTemplate>

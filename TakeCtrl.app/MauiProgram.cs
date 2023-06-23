@@ -21,9 +21,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(DeviceInfo.Platform == DevicePlatform.Android
+/*        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(DeviceInfo.Platform == DevicePlatform.Android
             ? "http://10.0.2.2:5100"
-            : "http://localhost:5100" )});
+            : "http://localhost:5100" )});*/
 
 
         builder.Services.AddTransient<LoginPage>();

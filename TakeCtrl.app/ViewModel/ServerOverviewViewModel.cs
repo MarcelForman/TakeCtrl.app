@@ -23,12 +23,13 @@ namespace TakeCtrl.app.ViewModel
         [ObservableProperty]
         ObservableCollection<ServerDto> servers;
         private readonly Task initTask;
+        [ObservableProperty]
+        public string refreshDate;
 
         public ServerOverviewViewModel(IServerService serverService)
         {
             this.serverService = serverService;
             servers = new ObservableCollection<ServerDto>();
-            //LoadDataCommand = new Command(async () => await LoadData());
             this.initTask = InitAsync();
 
             try 
@@ -83,6 +84,7 @@ namespace TakeCtrl.app.ViewModel
 
             if (result != null)
             {
+                RefreshDate = DateTime.Now.ToString();
                 Servers.Clear();
                 foreach (ServerDto server in result)
                 {

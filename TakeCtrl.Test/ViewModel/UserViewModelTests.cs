@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.Platform;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace TakeCtrl.Test.ViewModel
         public async Task IfNoUsersThenShowUserWithNoUserMessage()
         {
             
-            var viewModel = new UserViewModel(new MockUserService());
+            var viewModel = new UserViewModel(new MockUserService());             
             await viewModel.GetUsers();
 
             var name = viewModel.Users.First().Name;

@@ -5,6 +5,7 @@ using TakeCtrl.app.Communication.Contracts;
 using TakeCtrl.app.Model;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Alerts;
+using System.Diagnostics;
 
 namespace TakeCtrl.app.ViewModel
 {

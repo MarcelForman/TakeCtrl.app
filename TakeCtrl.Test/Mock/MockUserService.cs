@@ -32,5 +32,10 @@ namespace TakeCtrl.Test.Mock
         {
             throw new NotImplementedException();
         }
+
+        Task<User> IUserService.Login(LoginUser loginUser)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
